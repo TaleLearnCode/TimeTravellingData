@@ -1,0 +1,20 @@
+5 Business Problems You Can Solve Using Temporal Tables
+https://youtu.be/VUuWWm66NQM
+
+Temporal Tables - (System-Version Tables) - EF Core - SQL Server
+https://youtu.be/asF1ZRuLB0Y
+
+Entity Framework Core 6 - Easy Audits with Temporal Tables
+https://youtu.be/i5kjiZ4tBnI
+
+Temporal table usage scenarios
+https://docs.microsoft.com/en-us/sql/relational-databases/tables/temporal-table-usage-scenarios?view=sql-server-ver16
+
+Temporal Table Considerations and Limitations
+https://docs.microsoft.com/en-us/sql/relational-databases/tables/temporal-table-considerations-and-limitations?view=sql-server-ver16
+
+Prime your flux capacitor: SQL Server temporal tables in EF Core 6.0
+https://devblogs.microsoft.com/dotnet/prime-your-flux-capacitor-sql-server-temporal-tables-in-ef-core-6-0/
+
+What's New in EF Core 6.0
+https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-6.0/whatsnew#sql-server-temporal-tables
