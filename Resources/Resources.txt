@@ -1,3 +1,7 @@
+Microsoft Documentation
+https://docs.microsoft.com/en-us/sql/relational-databases/tables/temporal-tables?view=sql-server-ver16
+
+
 5 Business Problems You Can Solve Using Temporal Tables
 https://youtu.be/VUuWWm66NQM
 
@@ -18,3 +22,18 @@ https://devblogs.microsoft.com/dotnet/prime-your-flux-capacitor-sql-server-tempo
 
 What's New in EF Core 6.0
 https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-6.0/whatsnew#sql-server-temporal-tables
+
+Temporal tables vs The World
+https://www.linkedin.com/pulse/temporal-tables-vs-world-g%C3%A1bor-imre-bata-kov%C3%A1cs/
+
+System-Versioned Temporal Tables - A Case Study
+https://www.sqlservercentral.com/articles/system-versioned-temporal-tables-a-case-study
+
+How to use Historical Data with Temporal Tables in EF Core 6
+https://medium.com/geekculture/working-with-historical-data-using-temporal-tables-in-ef-core-6-5bf12719beac
+
+Effortlessly Analyze Data History Using Temporal Tables
+https://cloudblogs.microsoft.com/sqlserver/2016/01/11/effortlessly-analyze-data-history-using-temporal-tables-2/
+
+Time Traveling Use Cases with Temporal Tables in SQL Server 2016
+https://www.linkedin.com/pulse/time-traveling-use-cases-temporal-tables-sql-server-balasubramaniam/
