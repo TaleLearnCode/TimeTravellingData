@@ -1,0 +1,12 @@
+﻿Database
+--------
+TTD_EFCore
+
+Migrate
+-------
+dotnet ef database update
+
+Script
+------
+SELECT *, PeriodStart, PeriodEnd FROM Employee
+SELECT * FROM EmployeeHistory
