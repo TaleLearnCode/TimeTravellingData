@@ -22,12 +22,12 @@ During this session, Chad will explain the key scenarios around the use of Tempo
 ## Learning Objectives
 * Understand the key scenarios around the use of SQL Server temporal tables
 * Understand how to get started using temporal tables
-* Understand best practices and limitations of temportal tables
+* Understand best practices and limitations of temporal tables
 
 ## Presentations
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
 | [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | August 9, 2022 | 3:30 pm CDT | 2201 | Available Afterwards | 
-| [Beer City Code](https://www.beercitycode.com/) | Grand Rapids, MI | August 6, 2022 | 2:00 pm EDT | 255 | Available Afterwards | 
+| [Beer City Code](https://www.beercitycode.com/) | Grand Rapids, MI | August 6, 2022 | 2:00 pm EDT | 255 | [Slides](Presentations/TimeTravellingData_BeerCityCode2022.pdf) | 
 | [TechBash](https://techbash.com/2019-schedule) | Pocono Manor, PA | November 15, 2019 | 11:30 am EST | Rosewood | [Slides](Presentations/TimeTravelingTables-TechBash2019.pdf) | 
