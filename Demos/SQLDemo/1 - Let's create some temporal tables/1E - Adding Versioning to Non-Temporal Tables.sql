@@ -7,12 +7,12 @@
 
 CREATE TABLE OldDepartment
 (
-  DepartmentId       INT                                     NOT NULL,
-  DepartmentName     VARCHAR(50)                             NOT NULL,
-  ManagerId          INT                                         NULL,
-  ParentDepartmentId INT                                         NULL,
+  DepartmentId       INT         NOT NULL,
+  DepartmentName     VARCHAR(50) NOT NULL,
+  ManagerId          INT             NULL,
+  ParentDepartmentId INT             NULL,
   CONSTRAINT pkcOldDepartment PRIMARY KEY CLUSTERED (DepartmentId)
-) WITH (SYSTEM_VERSIONING = ON)
+)
 GO
 
 ALTER TABLE OldDepartment
@@ -21,7 +21,18 @@ ALTER TABLE OldDepartment
             PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo)
 GO
 
-ALTER TABLE OldDepartment SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = History.OldDepartmentHistory));
+CREATE TABLE OldDepartment_History
+(
+  DepartmentId       INT         NOT NULL,
+  DepartmentName     VARCHAR(50) NOT NULL,
+  ManagerId          INT             NULL,
+  ParentDepartmentId INT             NULL,
+  ValidFrom          DATETIME2   NOT NULL,
+  ValidTo            DATETIME2   NOT NULL
+)
+GO
+
+ALTER TABLE OldDepartment SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.OldDepartment_History));
 
 /*
 

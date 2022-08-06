@@ -57,6 +57,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="1 - Let%27s create some temporal tables" />
+    <Folder Include="2 - INSERTs, UPDATEs, and DELETEs, oh my" />
+    <Folder Include="3 - Roads, where we are going we don%27t need roads" />
   </ItemGroup>
   <ItemGroup>
     <None Include="1 - Let%27s create some temporal tables\1A - Creating a temporal table with an anonymous history table.sql" />
@@ -64,5 +66,14 @@
     <None Include="1 - Let%27s create some temporal tables\1C - Creating a temporal table with a user-defined history table.sql" />
     <None Include="1 - Let's create some temporal tables\1E - Adding Versioning to Non-Temporal Tables.sql" />
     <None Include="1 - Let's create some temporal tables\1D - Creating a temporal table with hidden periods.sql" />
+    <None Include="2 - INSERTs, UPDATEs, and DELETEs, oh my\2A - Inserting Data.sql" />
+    <None Include="2 - INSERTs, UPDATEs, and DELETEs, oh my\2B - Updating the current table.sql" />
+    <None Include="2 - INSERTs, UPDATEs, and DELETEs, oh my\2C - Updating the current table from the history table.sql" />
+    <None Include="2 - INSERTs, UPDATEs, and DELETEs, oh my\2D - Deleting Data.sql" />
+    <None Include="2 - INSERTs, UPDATEs, and DELETEs, oh my\2E - Using MERGE to modify data in temporal table.sql" />
+    <None Include="3 - Roads, where we are going we don't need roads\3A - Querying temporal tables.sql" />
+    <None Include="3 - Roads, where we are going we don't need roads\3B - Point in time queries.sql" />
+    <None Include="3 - Roads, where we are going we don't need roads\3C - Interval Queries.sql" />
+    <None Include="3 - Roads, where we are going we don't need roads\3D - Cleaning up history.sql" />
   </ItemGroup>
 </Project>
