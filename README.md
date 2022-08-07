@@ -28,6 +28,6 @@ During this session, Chad will explain the key scenarios around the use of Tempo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
-| [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | August 9, 2022 | 3:30 pm CDT | 2201 | Available Afterwards | 
+| [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | August 9, 2022 | 3:30 pm CDT | 2201 | S[](Presentations/TimeTravellingData_KCDC2022.pdf)lides | 
 | [Beer City Code](https://www.beercitycode.com/) | Grand Rapids, MI | August 6, 2022 | 2:00 pm EDT | 255 | [Slides](Presentations/TimeTravellingData_BeerCityCode2022.pdf) | 
 | [TechBash](https://techbash.com/2019-schedule) | Pocono Manor, PA | November 15, 2019 | 11:30 am EST | Rosewood | [Slides](Presentations/TimeTravelingTables-TechBash2019.pdf) | 
