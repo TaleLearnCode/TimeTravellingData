@@ -1,4 +1,5 @@
 ﻿DateTime _updateDateTime = DateTime.UtcNow;
+using DemoContext context = new();
 
 do
 {
@@ -10,7 +11,6 @@ do
 	Console.ReadLine();
 	Console.ResetColor();
 } while (true);
-
 
 async Task SwitchboardAsync()
 {
@@ -76,21 +76,18 @@ async Task SwitchboardAsync()
 async Task InitializeDatabase()
 {
 	Console.WriteLine("Initializing database...");
-	Employee graham = new() { FirstName = "Leanney", LastName = "Graham", Department = "HR" };
-	Employee howell = new() { FirstName = "Ervint", LastName = "Howell", Department = "HR" };
-	Employee baucho = new() { FirstName = "Clementine", LastName = "Baucho", Department = "Legal" };
-	Employee lebsack = new() { FirstName = "Patriciari", LastName = "Lebsack", Department = "IT" };
-	Employee dietrich = new() { FirstName = "Chelst", LastName = "Dietrich", Department = "IT" };
-	Employee weissnat = new() { FirstName = "Kurt", LastName = "Weissnat", Department = "IT" };
-	using DemoContext context = new();
-	await context.AddRangeAsync(graham, howell, baucho, lebsack, dietrich, weissnat);
+	await context.Employees.AddAsync(new() { FirstName = "Aurelia", LastName = "Bogart", Department = "HR" });
+	await context.Employees.AddAsync(new() { FirstName = "Faith", LastName = "Mitchell", Department = "HR" });
+	await context.Employees.AddAsync(new() { FirstName = "Jason", LastName = "Fielder", Department = "Legal" });
+	await context.Employees.AddAsync(new() { FirstName = "Chris", LastName = "Dean", Department = "IT" });
+	await context.Employees.AddAsync(new() { FirstName = "William", LastName = "Gott", Department = "IT" });
+	await context.Employees.AddAsync(new() { FirstName = "Annie", LastName = "Smith", Department = "IT" });
 	context.SaveChanges();
 	Console.WriteLine("Database initialization complete");
 }
 
 async Task UpdateDepartmentAsync(int employeeId, string department)
 {
-	using DemoContext context = new();
 	Employee? employee = await context.Employees.FindAsync(employeeId);
 	if (employee is not null)
 	{
@@ -102,7 +99,6 @@ async Task UpdateDepartmentAsync(int employeeId, string department)
 
 async Task DeleteEmployeeAsync(int employeeId)
 {
-	using DemoContext context = new();
 	Employee? employee = await context.Employees.FindAsync(employeeId);
 	if (employee is not null)
 	{
@@ -113,7 +109,6 @@ async Task DeleteEmployeeAsync(int employeeId)
 
 void PrintEmployeeHistory(int employeeId)
 {
-	using DemoContext context = new();
 	var history = context.Employees.TemporalAll().Where(emp => emp.Id == 2)
 								.OrderByDescending(emp => EF.Property<DateTime>(emp, "PeriodStart"))
 								.Select(emp => new
@@ -132,7 +127,6 @@ void PrintEmployeeHistory(int employeeId)
 
 async Task PrintEmployeeAsOfDateTimeAsync(int employeeId, DateTime dateTime)
 {
-	using DemoContext context = new();
 	Employee? employee = await context.Employees.FindAsync(employeeId);
 	Employee? historicalEmployee = await context.Employees
 		.TemporalAsOf(dateTime)
@@ -147,9 +141,15 @@ async Task PrintEmployeeAsOfDateTimeAsync(int employeeId, DateTime dateTime)
 
 async Task RestoreDeletedEmployeeAsync(int employeeId)
 {
-	using DemoContext context = new();
-	DateTime delTimestamp = await context.Employees.TemporalAll().Where(x => x.Id == employeeId).OrderBy(x => EF.Property<DateTime>(x, "PeriodEnd")).Select(x => EF.Property<DateTime>(x, "PeriodEnd")).LastAsync();
-	Employee deletedEmployee = await context.Employees.TemporalAsOf(delTimestamp.AddMilliseconds(-1)).SingleAsync(x => x.Id == employeeId);
+	DateTime delTimestamp = await context.Employees
+		.TemporalAll()
+		.Where(x => x.Id == employeeId)
+		.OrderBy(x => EF.Property<DateTime>(x, "PeriodEnd"))
+		.Select(x => EF.Property<DateTime>(x, "PeriodEnd"))
+		.LastAsync();
+	Employee deletedEmployee = await context.Employees
+		.TemporalAsOf(delTimestamp.AddMilliseconds(-1))
+		.SingleAsync(x => x.Id == employeeId);
 	await context.AddAsync(deletedEmployee);
 	context.Database.OpenConnection();
 	context.Database.ExecuteSqlInterpolated($"SET IDENTITY_INSERT Employee ON");
