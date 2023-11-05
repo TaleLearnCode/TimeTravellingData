@@ -28,6 +28,7 @@ During this session, Chad will explain the key scenarios around the use of Tempo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
+| [TechBash](https://techbash.com/) | Pocono Manor, PA | November 8, 2023 | 1:30 PM EST | Aloeswood | [Slides](Presentations/TimeTravellingData_TechBash2023.pdf) |
 | [DevSpace](https://www.devspaceconf.com/sessions.html?id=937) | Huntsville, AL | October 24, 2023 | 2:30 PM CDT | Ballroom 4 | [Slides](Presentations/TimeTravellingData_DevSpace2023.pdf) |
 | [Prairie Dev Con Winnipeg](https://www.prairiedevcon.com/winnipeg.html) | Winnipeg, MB | November 8, 2022 | 2:15 PM CST | A3 | [Slides](Presentations/TimeTravellingData_PDCWinnipeg.pdf) |
 | [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | August 9, 2022 | 3:30 pm CDT | 2201 | [Slides](Presentations/TimeTravellingData_KCDC2022.pdf) | 
