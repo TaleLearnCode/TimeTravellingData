@@ -28,9 +28,10 @@ During this session, Chad will explain the key scenarios around the use of Tempo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
-| [TechBash](https://techbash.com/) | Pocono Manor, PA | November 8, 2023 | 1:30 PM EST | Aloeswood | [Slides](Presentations/TimeTravellingData_TechBash2023.pdf) |
-| [DevSpace](https://www.devspaceconf.com/sessions.html?id=937) | Huntsville, AL | October 24, 2023 | 2:30 PM CDT | Ballroom 4 | [Slides](Presentations/TimeTravellingData_DevSpace2023.pdf) |
-| [Prairie Dev Con Winnipeg](https://www.prairiedevcon.com/winnipeg.html) | Winnipeg, MB | November 8, 2022 | 2:15 PM CST | A3 | [Slides](Presentations/TimeTravellingData_PDCWinnipeg.pdf) |
-| [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | August 9, 2022 | 3:30 pm CDT | 2201 | [Slides](Presentations/TimeTravellingData_KCDC2022.pdf) | 
-| [Beer City Code](https://www.beercitycode.com/) | Grand Rapids, MI | August 6, 2022 | 2:00 pm EDT | 255 | [Slides](Presentations/TimeTravellingData_BeerCityCode2022.pdf) | 
-| [TechBash](https://techbash.com/2019-schedule) | Pocono Manor, PA | November 15, 2019 | 11:30 am EST | Rosewood | [Slides](Presentations/TimeTravelingTables-TechBash2019.pdf) | 
+| [Visual Studio Live!](https://vslive.com/events/las-vegas-2026/sessions/wednesday/w09-ff-data.aspx) | Las Vegas, NV | 2026-03-18 | 13:30 PDT | W09 | Available Afterwards |
+| [TechBash](https://techbash.com/) | Pocono Manor, PA | 2023-11-08 | 13:30 EST | Aloeswood | [Slides](Presentations/TimeTravellingData_TechBash2023.pdf) |
+| [DevSpace](https://www.devspaceconf.com/sessions.html?id=937) | Huntsville, AL | 2023-10-24 | 14:30 CDT | Ballroom 4 | [Slides](Presentations/TimeTravellingData_DevSpace2023.pdf) |
+| [Prairie Dev Con Winnipeg](https://www.prairiedevcon.com/winnipeg.html) | Winnipeg, MB | 2022-11-08 | 14:15 CST | A3 | [Slides](Presentations/TimeTravellingData_PDCWinnipeg.pdf) |
+| [KCDC](https://www.kcdc.info/agenda) | Kansas City, MO | 2022-08-09 | 15:30 CDT | 2201 | [Slides](Presentations/TimeTravellingData_KCDC2022.pdf) |
+| [Beer City Code](https://www.beercitycode.com/) | Grand Rapids, MI | 2022-08-06 | 14:00 EDT | 255 | [Slides](Presentations/TimeTravellingData_BeerCityCode2022.pdf) |
+| [TechBash](https://techbash.com/2019-schedule) | Pocono Manor, PA | 2019-11-15 | 11:30 EST | Rosewood | [Slides](Presentations/TimeTravelingTables-TechBash2019.pdf) |
