@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "agents": [
+    {
+      "persistent_name": "Doc",
+      "universe": "back-to-the-future",
+      "role": "Lead / Demo Director",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "Marty",
+      "universe": "back-to-the-future",
+      "role": "SQL Developer",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "Jennifer",
+      "universe": "back-to-the-future",
+      "role": ".NET / EF Dev",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "Biff",
+      "universe": "back-to-the-future",
+      "role": "Tester / Reviewer",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "Scribe",
+      "universe": "exempt",
+      "role": "Session Logger",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "Ralph",
+      "universe": "exempt",
+      "role": "Work Monitor",
+      "created_at": "2026-03-01T23:33:52Z",
+      "legacy_named": false,
+      "status": "active"
+    }
+  ]
+}

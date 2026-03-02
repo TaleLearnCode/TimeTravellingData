@@ -1,0 +1,29 @@
+# Terraform .gitignore
+
+# Local Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform variable files (may contain secrets)
+terraform.tfvars
+
+# Terraform crash log files
+crash.log
+crash.*.log
+
+# Terraform directory
+.terraform/
+.terraform.lock.hcl
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plan output files
+*.tfplan
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc

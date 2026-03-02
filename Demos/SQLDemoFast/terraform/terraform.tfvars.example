@@ -1,0 +1,33 @@
+# ============================================================================
+# TIME TRAVELLING DATA: Terraform Variables Example
+# ============================================================================
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to git (it contains secrets!)
+# ============================================================================
+
+resource_group_name = "rg-temporal-tables-demo"
+location            = "East US"
+
+# SQL Server name must be globally unique across ALL of Azure
+# Suggestion: Use your initials or a random suffix
+# Example: sql-temporal-demo-abc123
+sql_server_name = "sql-temporal-demo-YOUR-UNIQUE-SUFFIX"
+
+sql_admin_username = "sqladmin"
+
+# IMPORTANT: Set a strong password that meets Azure requirements:
+#   • At least 12 characters
+#   • Contains uppercase, lowercase, numbers, and symbols
+#   • Not a common word or pattern
+# sql_admin_password = "YourSecureP@ssw0rd123!"
+
+# Find your public IP address:
+#   • Visit https://whatismyip.com
+#   • Or run: curl ifconfig.me
+# presenter_ip_address = "203.0.113.45"
+
+tags = {
+  environment = "demo"
+  project     = "temporal-tables"
+  owner       = "your-name"
+}
