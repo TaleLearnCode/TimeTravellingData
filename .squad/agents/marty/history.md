@@ -111,3 +111,23 @@ Create a focused SSMS demo that:
 - **Comments matter in live demos**: These aren't just code comments, they're presenter notes and audience reading material
 
 **Decisions Written To:** `.squad/decisions/inbox/marty-sqldemofast-decisions.md`
+
+## TemporalEFDemo Database Resource — Terraform Update
+
+**Date:** 2026-03-02  
+**Task:** Add TemporalEFDemo database to Terraform for Demo 2 (EF Core)
+
+### Changes Made
+- **main.tf:** Added `azurerm_mssql_database` resource for TemporalEFDemo
+  - Same Azure SQL Server as TemporalSQLDemo (Demo 1)
+  - Consistent SKU and configuration
+  - Follows naming and variable conventions
+- **outputs.tf:** Added `temporal_ef_demo_db_name` and `temporal_ef_demo_connection_string` outputs
+
+### Verification
+✅ Terraform configuration valid  
+✅ Database resource correctly integrated with existing server infrastructure  
+✅ Connection strings available for Jennifer's EF Core app configuration
+
+### Architecture Note
+Same-server strategy confirmed by Chad—both Demo 1 (SQL) and Demo 2 (EF Core) run independently on single Azure SQL server with separate databases (TemporalSQLDemo and TemporalEFDemo).

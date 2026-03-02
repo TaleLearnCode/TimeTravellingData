@@ -1752,3 +1752,82 @@ ValidTo   DATETIME2 GENERATED ALWAYS AS ROW END   HIDDEN NOT NULL,
 ---
 
 
+
+
+---
+
+# Decision: EF Core Demo Structure
+
+**Author:** Jennifer  
+**Date:** 2026-03-02  
+**Status:** Proposed
+
+## Context
+
+Demo 2 (EFCoreDemoFast) needed an EF Core 8 project showing temporal table support for the "Time Travelling Data" 20-minute conference presentation.
+
+## Decisions Made
+
+### 1. Database: TemporalEFDemo (separate from Demo 1)
+Demo 2 uses a **different database** (`TemporalEFDemo`) on the same Azure SQL server as Demo 1 (`TemporalSQLDemo`). No cross-dependency between demos. Each demo is fully self-contained.
+
+### 2. Employee Domain — consistent with Demo 1
+Carried over Alice Hart, Bob Chen, Carol Reyes, David Kim with the same starting salaries and titles. Demo narrative is identical (Alice promoted, David terminated) so the audience sees the same story told in two different ways.
+
+### 3. C# DateTime capture (no hardcoded timestamps)
+Rather than hardcoding SQL timestamps like Demo 1 does for T-SQL demos, Demo 2 captures `DateTime seedTime` and `DateTime afterChanges` as C# variables during execution. This shows the natural C# developer workflow and avoids the "magic strings" problem in live demos.
+
+### 4. All 5 temporal LINQ extensions demonstrated
+- `TemporalAll()` → `FOR SYSTEM_TIME ALL`
+- `TemporalAsOf()` → `FOR SYSTEM_TIME AS OF`
+- `TemporalBetween()` → `FOR SYSTEM_TIME BETWEEN`
+- `TemporalFromTo()` → `FOR SYSTEM_TIME FROM ... TO`
+- `TemporalContainedIn()` → `FOR SYSTEM_TIME CONTAINED IN`
+
+Each LINQ call maps to its T-SQL equivalent (shown in comments) to bridge the two demos for the audience.
+
+### 5. No period columns on POCO
+PeriodStart/PeriodEnd are EF shadow properties only. The Employee POCO is intentionally minimal — demonstrates that temporal behavior is infrastructure, not domain model concern.
+
+### 6. Migration hand-crafted with fake timestamp
+The migration file uses `20240101000000` as a timestamp. This is fine — it just needs to be a valid date string for EF ordering. This avoids requiring `dotnet ef migrations add` at setup time.
+
+### 7. appsettings.json gitignored
+Connection string lives in `appsettings.json` (gitignored). `appsettings.example.json` committed with placeholder values. Presenter updates `appsettings.json` before the demo.
+
+
+---
+
+# Biff's Review of EF Core Demo (Demo 2)
+
+## Review Verdict: APPROVED ✅
+
+I have thoroughly reviewed the EF Core demo project (`Demos/EFCoreDemoFast`) and found it to be high-quality, correct, and demo-ready.
+
+### 1. Correctness & Logic
+- **Temporal Configuration:** The `IsTemporal()` configuration in `TemporalContext.cs` correctly maps to the `20240101000000_InitialCreate.cs` migration. The history table `EmployeesHistory` is correctly defined.
+- **Idempotency:** `ExecuteDeleteAsync()` at the start of `Program.cs` ensures the demo can be run repeatedly without duplicating data. `MigrateAsync()` ensures the database is created.
+- **Seeding & Timing:**
+    - `seedTime` is captured *after* `SaveChangesAsync()`, ensuring the seeded rows have `PeriodStart` timestamps <= `seedTime`.
+    - The 3-second delay (`Task.Delay(3000)`) provides a safe buffer ensuring `seedTime.AddSeconds(1)` falls strictly between the seed transaction and the update transaction.
+    - `afterChanges` is captured correctly after the second transaction.
+
+### 2. Temporal Query Validation
+- **TemporalAsOf:** `TemporalAsOf(seedTime.AddSeconds(1))` will correctly return all 4 original employees (Alice, Bob, Carol, David). The query time (T_seed + 1s) is guaranteed to be before the updates (T_seed + 3s). The expected output in README correctly shows all 4.
+- **TemporalContainedIn:** David's row is created at T_seed and deleted at T_update. The query window `(seedTime - 1s, afterChanges + 1s)` fully encompasses David's valid period `[T_seed, T_update)`. This is correct.
+- **TemporalBetween vs FromTo:** The distinction is subtle but the code uses them correctly. Given the timestamps are derived from execution time, the results will likely be identical in this specific run, but showcasing both API methods is valuable for the audience.
+
+### 3. Demo Quality
+- **Readability:** The console output (using `Console.WriteLine` with table formatting) is excellent and audience-friendly.
+- **Code Clarity:** The comments in `Program.cs` effectively link the EF Core LINQ methods to their T-SQL counterparts from Demo 1 (e.g., `// LINQ: ...TemporalAll()`, `// T-SQL: ...FOR SYSTEM_TIME ALL`).
+- **Timing:** The demo is concise. Migration check (~1s) + Seed (~1s) + Wait (3s) + Update (~1s) + Queries (~1s) = ~7-10 seconds runtime. The 2-minute script estimate allows ample time for the speaker to explain the code.
+
+### 4. Configuration
+- **Project File:** Correctly targets .NET 8 and uses `Microsoft.EntityFrameworkCore.SqlServer` 8.0.0.
+- **Secrets:** `appsettings.json` is correctly in `.gitignore`. `appsettings.example.json` provides a safe template.
+
+### Minor Suggestion (Non-Blocking)
+- The `TemporalBetween` and `TemporalFromTo` queries might return identical results in this specific scenario because the start/end points are "safe" timestamps outside the transaction boundaries. This is acceptable for the demo as it proves the API works, even if it doesn't highlight the edge-case boundary differences (which are hard to demo reliably with live execution timing).
+
+**Ready for Chad to present.**
+

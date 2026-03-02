@@ -5,8 +5,11 @@ This directory contains Terraform configuration to provision Azure SQL Database 
 ## Prerequisites
 
 1. **Azure CLI** — Install from https://aka.ms/azure-cli
-2. **Terraform** — Install from https://terraform.io/downloads
+2. **Terraform** — Version >= 1.3 (required by azurerm v4 provider)
+   - Install from https://terraform.io/downloads
 3. **Azure Subscription** — Active subscription with permissions to create resources
+4. **Azure Provider v4** — This configuration uses azurerm v4, which requires:
+   - `subscription_id` must be set in `terraform.tfvars` (or via `ARM_SUBSCRIPTION_ID` environment variable)
 
 ## Setup Steps
 

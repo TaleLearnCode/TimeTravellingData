@@ -30,6 +30,17 @@ output "ssms_connection_info" {
   }
 }
 
+output "ef_demo_database_name" {
+  description = "Name of the EF Core demo SQL database"
+  value       = azurerm_mssql_database.temporal_ef_demo.name
+}
+
+output "ef_demo_connection_string" {
+  description = "Connection string for the EF Core demo database (update with actual password)"
+  value       = "Server=tcp:${azurerm_mssql_server.temporal_demo.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.temporal_ef_demo.name};Persist Security Info=False;User ID=${var.sql_admin_username};Password=<your-password>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  sensitive   = false
+}
+
 # ============================================================================
 # HOW TO USE THESE OUTPUTS
 # ============================================================================

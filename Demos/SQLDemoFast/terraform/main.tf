@@ -6,18 +6,19 @@
 # ============================================================================
 
 terraform {
-  required_version = ">= 1.0, < 2.0"
-  
+  required_version = ">= 1.3, < 2.0"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
 }
 
 provider "azurerm" {
   features {}
+  subscription_id = var.subscription_id
 }
 
 # ============================================================================
@@ -46,7 +47,7 @@ resource "azurerm_mssql_server" "temporal_demo" {
   version                      = "12.0"
   administrator_login          = var.sql_admin_username
   administrator_login_password = var.sql_admin_password
-  
+
   tags = var.tags
 }
 
@@ -64,7 +65,26 @@ resource "azurerm_mssql_database" "temporal_demo" {
   max_size_gb    = 2
   sku_name       = "S0"
   zone_redundant = false
-  
+
+  tags = var.tags
+}
+
+# ============================================================================
+# AZURE SQL DATABASE: EF Core Demo
+# ============================================================================
+# Separate database for the Entity Framework Core temporal tables demo.
+# Uses the same SQL Server as the SQL demo — no separate server to manage.
+# This database is managed by EF Core migrations (run: dotnet ef database update)
+# ============================================================================
+
+resource "azurerm_mssql_database" "temporal_ef_demo" {
+  name           = "TemporalEFDemo"
+  server_id      = azurerm_mssql_server.temporal_demo.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb    = 2
+  sku_name       = "S0"
+  zone_redundant = false
+
   tags = var.tags
 }
 

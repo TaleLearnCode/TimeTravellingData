@@ -5,6 +5,9 @@
 # DO NOT commit terraform.tfvars to git (it contains secrets!)
 # ============================================================================
 
+# Azure Subscription ID — find it with: az account show --query id -o tsv
+# subscription_id = "00000000-0000-0000-0000-000000000000"
+
 resource_group_name = "rg-temporal-tables-demo"
 location            = "East US"
 
