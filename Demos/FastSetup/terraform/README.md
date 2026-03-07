@@ -1,6 +1,14 @@
 # Terraform Deployment Guide
 
-This directory contains Terraform configuration to provision Azure SQL Database for the temporal tables demo.
+This directory contains Terraform configuration to provision Azure SQL infrastructure for **both** Time Travelling Data fast demos:
+
+| Resource | Used By |
+|----------|---------|
+| Azure SQL Server | Demo 1 (SQLDemoFast) + Demo 2 (EFCoreDemoFast) |
+| `TemporalDemo` database | Demo 1 — SQLDemoFast (T-SQL + SSMS) |
+| `TemporalEFDemo` database | Demo 2 — EFCoreDemoFast (EF Core) |
+
+Both demos share one server. You only need to run `terraform apply` once before either demo.
 
 ## Prerequisites
 
@@ -62,7 +70,7 @@ terraform plan
 Review the planned changes. You should see:
 - 1 Resource Group
 - 1 SQL Server
-- 1 SQL Database
+- 2 SQL Databases (`TemporalDemo` + `TemporalEFDemo`)
 - 2 Firewall Rules
 
 ### 5. Deploy to Azure
@@ -81,11 +89,11 @@ After deployment completes:
 # Get the SQL Server FQDN (fully qualified domain name)
 terraform output sql_server_fqdn
 
-# Get the connection string (includes password — keep secure!)
-terraform output -raw connection_string
-
-# Get all SSMS connection info
+# Demo 1 — SQLDemoFast connection info (for SSMS)
 terraform output ssms_connection_info
+
+# Demo 2 — EFCoreDemoFast connection string (paste into appsettings.json)
+terraform output -raw ef_demo_connection_string
 ```
 
 ### 7. Connect in SSMS
@@ -100,11 +108,19 @@ terraform output ssms_connection_info
 
 ### 8. Run the Demo Scripts
 
-Now that the database is provisioned, execute the SQL scripts in order:
+Now that the infrastructure is provisioned:
 
+**Demo 1 — SQLDemoFast** (connect to `TemporalDemo` in SSMS):
 1. **01-Setup.sql** — Creates temporal table, inserts data, seeds history
 2. **02-Observe.sql** — Shows live DML changes being tracked
 3. **03-TimeTravel.sql** — Demonstrates FOR SYSTEM_TIME queries
+
+**Demo 2 — EFCoreDemoFast** (update `appsettings.json` connection string):
+```bash
+cd ../../EFCoreDemoFast
+# Edit appsettings.json — use the ef_demo_connection_string output above
+dotnet run
+```
 
 ## Troubleshooting
 

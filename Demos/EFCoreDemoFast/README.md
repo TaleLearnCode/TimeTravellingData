@@ -8,9 +8,14 @@
 
 ## Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8)
-- Azure SQL database **TemporalEFDemo** provisioned (same server as Demo 1 — different database)
-  - The database must exist; the migration creates the `Employees` table and `EmployeesHistory` table automatically
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10)
+- `dotnet-ef` global tool (required for `dotnet ef` commands):
+  ```bash
+  dotnet tool install --global dotnet-ef
+  ```
+  If already installed, update it: `dotnet tool update --global dotnet-ef`
+- Azure SQL database **TemporalEFDemo** provisioned — use Terraform in `../FastSetup/terraform/` (same server as Demo 1, different database)
+  - The database must exist; the app creates the `Employees` table and `EmployeesHistory` table automatically
 - `appsettings.json` updated with your actual connection string (see Setup below)
 
 ---
@@ -33,11 +38,9 @@ cp appsettings.example.json appsettings.json
 dotnet restore
 ```
 
-### 3. (Optional) Apply migration only
+### 3. (Optional) Inspect the migration
 
-```bash
-dotnet ef database update
-```
+The `Migrations/` folder shows what EF would generate for a temporal table. It's reference material — `dotnet run` creates the table directly via raw SQL for a reliable demo reset.
 
 ### 4. Run the demo
 
@@ -45,14 +48,14 @@ dotnet ef database update
 dotnet run
 ```
 
-`dotnet run` applies migrations automatically (idempotent) and then executes the full demo flow. You can run it multiple times — it clears and re-seeds each time.
+`dotnet run` drops and recreates the `Employees` temporal table from scratch each run, then executes the full demo flow. Safe to run multiple times.
 
 ---
 
 ## Demo Script (~2 minutes)
 
 ### Opening (15 s)
-> "Demo 1 was raw T-SQL. Now let's see the same concepts through the lens of a C# developer using Entity Framework Core 8."
+> "Demo 1 was raw T-SQL. Now let's see the same concepts through the lens of a C# developer using Entity Framework Core 10."
 
 ### Step 1 — Show the .csproj (15 s)
 > "No special packages. Just the standard EF Core SQL Server provider. That's it."
@@ -73,7 +76,7 @@ Point to: `Data/TemporalContext.cs` — specifically `entity.ToTable(tb => tb.Is
 > "One line of fluent configuration tells EF: make this a system-versioned temporal table. EF generates the history table, the period columns, the SQL Server `WITH (SYSTEM_VERSIONING = ON)` — all of it."
 
 ### Step 4 — Show the migration (20 s)
-> "When we ran `dotnet ef migrations add`, EF generated this migration. Notice the SqlServer:IsTemporal annotation and the PeriodStart/PeriodEnd columns. EF translates this to the correct T-SQL CREATE TABLE statement with SYSTEM_VERSIONING."
+> "The Migrations folder shows what EF would generate when you run `dotnet ef migrations add`. Notice the `SqlServer:IsTemporal` annotation and the PeriodStart/PeriodEnd columns. For a reliable demo reset, we're creating the table directly with raw SQL — but in a real app, EF migrations handle all of this for you automatically."
 
 Point to: `Migrations/20240101000000_InitialCreate.cs`
 
@@ -108,8 +111,7 @@ Walk through console output:
   TIME TRAVELLING DATA — EF Core Temporal Tables Demo
 ══════════════════════════════════════════════════════════════
 
-Applying migrations...
-Clearing existing data...
+Resetting tables...
 
 Seeding employees...
   seedTime captured: 2024-01-01 00:00:05Z
@@ -166,6 +168,7 @@ Making changes:
 | `Database TemporalEFDemo not found` | Create the database in Azure Portal (empty DB is fine, migration creates tables) |
 | `Already applied migration` | Safe — `MigrateAsync()` is idempotent |
 | No rows in TemporalContainedIn | Ensure `seedTime.AddSeconds(-1)` is before David's PeriodStart; the 3-second wait helps ensure separation |
+| `dotnet-ef does not exist` | Run `dotnet tool install --global dotnet-ef` then retry |
 
 ---
 
@@ -173,7 +176,7 @@ Making changes:
 
 ```
 EFCoreDemoFast/
-├── EFCoreDemoFast.csproj          # .NET 8 project — standard EF Core SQL Server only
+├── EFCoreDemoFast.csproj          # .NET 10 project — standard EF Core SQL Server only
 ├── Program.cs                     # ← MAIN DEMO FILE — the full demo flow
 ├── appsettings.json               # Connection string (gitignored — contains secrets)
 ├── appsettings.example.json       # Safe placeholder version for source control

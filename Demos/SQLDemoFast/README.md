@@ -13,7 +13,7 @@ This demo showcases SQL Server temporal tables using an **Employee** domain. It 
 
 ### Option 1: Use Azure SQL (Recommended)
 
-1. **Provision infrastructure** with Terraform (see `terraform/README.md`)
+1. **Provision infrastructure** with Terraform (see `../FastSetup/terraform/README.md`)
 2. **Connect via SSMS** using the output from `terraform output ssms_connection_info`
 
 ### Option 2: Use Local SQL Server
@@ -239,7 +239,7 @@ Then re-run `01-Setup.sql` to start fresh.
 ### Option 2: Destroy Everything (Terraform)
 
 ```bash
-cd terraform
+cd ../FastSetup/terraform
 terraform destroy
 ```
 

@@ -13,15 +13,36 @@ Console.WriteLine("════════════════════�
 Console.WriteLine();
 
 // ── SETUP ────────────────────────────────────────────────────────
-// Apply migrations (idempotent — safe to run repeatedly)
-// This creates the Employees table WITH system versioning + EmployeesHistory table
+// Drop and recreate the temporal table on every run — clean demo state
 using var context = new TemporalContext();
-Console.WriteLine("Applying migrations...");
-await context.Database.MigrateAsync();
+Console.WriteLine("Setting up tables...");
 
-// Clear any existing data so each demo run starts fresh
-Console.WriteLine("Clearing existing data...");
-await context.Employees.ExecuteDeleteAsync();
+// Step 1: If a temporal table already exists, turn off system versioning before dropping
+await context.Database.ExecuteSqlRawAsync(@"
+    IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
+    BEGIN
+        ALTER TABLE dbo.Employees SET (SYSTEM_VERSIONING = OFF);
+        DROP TABLE IF EXISTS dbo.EmployeesHistory;
+        DROP TABLE dbo.Employees;
+    END;
+");
+
+// Step 2: Create the Employees temporal table with system versioning
+// In production you'd use EF migrations (see Migrations/ folder — EF generates this DDL).
+// Here we use raw SQL for a reliable, idempotent demo reset every run.
+await context.Database.ExecuteSqlRawAsync(@"
+    CREATE TABLE dbo.Employees (
+        Id          INT            NOT NULL IDENTITY(1,1)
+                    CONSTRAINT PK_Employees PRIMARY KEY,
+        Name        NVARCHAR(100)  NOT NULL,
+        Title       NVARCHAR(100)  NOT NULL,
+        Salary      DECIMAL(10,2)  NOT NULL,
+        Department  NVARCHAR(100)  NOT NULL,
+        PeriodStart DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+        PeriodEnd   DATETIME2 GENERATED ALWAYS AS ROW END   HIDDEN NOT NULL,
+        PERIOD FOR SYSTEM_TIME (PeriodStart, PeriodEnd)
+    ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.EmployeesHistory));
+");
 Console.WriteLine();
 
 // ── SEED ─────────────────────────────────────────────────────────
