@@ -1,0 +1,6 @@
+# appsettings.json contains your real connection string — never commit it
+appsettings.json
+
+# Build output
+bin/
+obj/

@@ -28,7 +28,7 @@ During this session, Chad will explain the key scenarios around the use of Tempo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
-| [Visual Studio Live!](https://vslive.com/events/las-vegas-2026/sessions/wednesday/w09-ff-data.aspx) | Las Vegas, NV | 2026-03-18 | 13:30 PDT | W09 | Available Afterwards |
+| [Visual Studio Live!](https://vslive.com/events/las-vegas-2026/sessions/wednesday/w09-ff-data.aspx) | Las Vegas, NV | 2026-03-18 | 13:30 PDT | W09 | [Slides](EventMaterials/TimeTravellingData_VSLiveVegas2026.pdf) |
 | [TechBash](https://techbash.com/) | Pocono Manor, PA | 2023-11-08 | 13:30 EST | Aloeswood | [Slides](Presentations/TimeTravellingData_TechBash2023.pdf) |
 | [DevSpace](https://www.devspaceconf.com/sessions.html?id=937) | Huntsville, AL | 2023-10-24 | 14:30 CDT | Ballroom 4 | [Slides](Presentations/TimeTravellingData_DevSpace2023.pdf) |
 | [Prairie Dev Con Winnipeg](https://www.prairiedevcon.com/winnipeg.html) | Winnipeg, MB | 2022-11-08 | 14:15 CST | A3 | [Slides](Presentations/TimeTravellingData_PDCWinnipeg.pdf) |

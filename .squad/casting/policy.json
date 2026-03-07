@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "universe_allowlist": ["back-to-the-future"],
+  "max_agents_per_assignment": 10,
+  "allow_overflow": true,
+  "overflow_strategy": "diegetic-expansion"
+}
